@@ -15,11 +15,8 @@ namespace TheShitMod.Cards
     {
         protected override CardThemeColor.CardThemeColorType GetTheme() { return CardThemeColor.CardThemeColorType.ColdBlue; }
         public override string GetModName() { return TheShitMod.ModInitials; }
-        protected override CardInfo.Rarity GetRarity() { return CardInfo.Rarity.Common; }
+        protected override CardInfo.Rarity GetRarity() { return CardInfo.Rarity.Rare; }
         protected override GameObject GetCardArt() { return null; }
-
-        private WashingMachineLicenseComponent? m_component;
-
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
@@ -32,14 +29,14 @@ namespace TheShitMod.Cards
             UnityEngine.Debug.Log($"[{TheShitMod.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
 
             // check DealDamagePatch
-            m_component = player.gameObject.AddComponent<WashingMachineLicenseComponent>();
+            player.gameObject.AddComponent<WashingMachineLicenseComponent>();
         }
 
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
             UnityEngine.Debug.Log($"[{TheShitMod.ModInitials}][Card] {GetTitle()} has been removed from player {player.playerID}.");
 
-            UnityEngine.Object.Destroy(m_component!);
+            UnityEngine.Object.Destroy(player.gameObject.GetComponent<WashingMachineLicenseComponent>()!);
         }
 
         protected override string GetTitle()

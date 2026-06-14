@@ -13,6 +13,8 @@ namespace TheShitMod.Patches
     {
         static void Postfix(MapManager __instance, ref int mapID)
         {
+            UnityEngine.Debug.Log("CallInNewMap called");
+
             // fuck im falling over
             Camera.main.gameObject.transform.rotation = Quaternion.Euler(Vector3.zero);
 
@@ -30,22 +32,23 @@ namespace TheShitMod.Patches
                 // keep first line if relevant and append multiplier
                 // crown text seems to be synced globally between all players?
                 // probably shouldnt be using this
+                // okay i think i know why it's because i stored the IsRandomDamageComponent so it was global?
 
-                //CrownPos crown = (CrownPos)typeof(CharacterData).GetField("crownPos", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance).GetValue(player.data);
-                //string text = crown.text.text;
+                CrownPos crown = (CrownPos)typeof(CharacterData).GetField("crownPos", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance).GetValue(player.data);
+                string text = crown.text.text;
 
-                //int newlineIndex = text.IndexOf('\n');
-                //if (newlineIndex >= 0)
-                //{
-                //    text = text[..newlineIndex] + "\n";
-                //}
-                //else
-                //{
-                //    text = "";
-                //}
+                int newlineIndex = text.IndexOf('\n');
+                if (newlineIndex >= 0)
+                {
+                    text = text[..newlineIndex] + "\n";
+                }
+                else
+                {
+                    text = "";
+                }
 
-                //text += String.Format("x{0:0.000000000000000000}", component.m_totalDamageMultiplied);
-                //crown.text.text = text;
+                text += String.Format("x{0:0.000000000000000000}", component.m_totalDamageMultiplied);
+                crown.text.text = text;
             }
         }
     }

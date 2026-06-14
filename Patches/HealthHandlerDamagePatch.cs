@@ -19,16 +19,15 @@ namespace TheShitMod.Patches
         static void Postfix(HealthHandler __instance, ref Vector2 damage, ref Vector2 position, ref Color blinkColor, ref GameObject damagingWeapon, ref Player damagingPlayer, ref bool healthRemoval, ref bool lethal, ref bool ignoreBlock)
         {
             if (damagingPlayer == null) return;
+            if (!m_data(__instance).isPlaying) return;
+            if (m_data(__instance).dead) return;
+            if (m_data(__instance).block.IsBlocking() && !ignoreBlock) return;
+            if (m_isRespawning(__instance)) return;
 
             if (damagingPlayer.GetComponent<IsFallingOverComponent>() != null)
             {
                 // if we are not the main player, return
                 if (m_data(__instance).GetComponent<GeneralInput>().controlledElseWhere) return;
-
-                if (!m_data(__instance).isPlaying) return;
-                if (m_data(__instance).dead) return;
-                if (m_data(__instance).block.IsBlocking() && !ignoreBlock) return;
-                if (m_isRespawning(__instance)) return;
 
                 Camera.main.gameObject.transform.Rotate(new Vector3(0f, 0f, 10f));
             }
@@ -36,13 +35,7 @@ namespace TheShitMod.Patches
             if (damagingPlayer.GetComponent<IsSwappingHandsComponent>() != null)
             {
                 // dont do this once per player since that might fuck things up
-                if (m_data(__instance).GetComponent<GeneralInput>().controlledElseWhere) return;
-
-                if (!m_data(__instance).isPlaying) return;
-                if (m_data(__instance).dead) return;
-                if (m_data(__instance).block.IsBlocking() && !ignoreBlock) return;
-                if (m_isRespawning(__instance)) return;
-
+                //if (m_data(__instance).GetComponent<GeneralInput>().controlledElseWhere) return;
                 m_data(__instance).player.gameObject.GetComponent<PlayerCollision>().IgnoreWallForFrames(3);
                 damagingPlayer.gameObject.GetComponent<PlayerCollision>().IgnoreWallForFrames(3);
 
@@ -51,7 +44,8 @@ namespace TheShitMod.Patches
 
             if (damagingPlayer.GetComponent<WashingMachineLicenseComponent>())
             {
-                m_data(__instance).player.gameObject.AddComponent<BeingWashedComponent>();
+                if (m_data(__instance).GetComponent<GeneralInput>().controlledElseWhere) return;
+                Camera.main.gameObject.AddComponent<BeingWashedComponent>();
             }
         }
     }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using TheShitMod.Components;
 using UnboundLib;
 using UnboundLib.Cards;
 using UnityEngine;
@@ -19,7 +20,8 @@ namespace TheShitMod.Cards
         protected override CardInfo.Rarity GetRarity() { return CardInfo.Rarity.Common; }
         protected override GameObject GetCardArt() { return null; }
 
-        private ReversibleColorEffect? m_colorEffect;
+        // this member will only exist for some players but not others
+        // i hope Photon likes this
         private GameObject? m_postProcessingObj;
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
@@ -36,8 +38,7 @@ namespace TheShitMod.Cards
         {
             UnityEngine.Debug.Log($"[{TheShitMod.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
 
-            m_colorEffect = player.gameObject.AddComponent<ReversibleColorEffect>();
-            m_colorEffect.SetColor(new Color(0f, 1f, 0f));
+            player.gameObject.AddComponent<GreenComponent>();
 
             if (player.GetComponent<GeneralInput>().controlledElseWhere) return;
 
@@ -62,7 +63,7 @@ namespace TheShitMod.Cards
             UnityEngine.Debug.Log($"[{TheShitMod.ModInitials}][Card] {GetTitle()} has been removed from player {player.playerID}.");
             if (player.GetComponent<GeneralInput>().controlledElseWhere) return;
 
-            m_colorEffect!.Destroy();
+            UnityEngine.Object.Destroy(player.gameObject.GetComponent<GreenComponent>()!);
             UnityEngine.Object.Destroy(m_postProcessingObj!);
         }
 
@@ -85,6 +86,13 @@ namespace TheShitMod.Cards
                     positive = true,
                     stat = "Green",
                     amount = "Yes",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                },
+                new CardInfoStat()
+                {
+                    positive = false,
+                    stat = "Limbs",
+                    amount = "Lost ????",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 }
             };

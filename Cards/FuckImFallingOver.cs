@@ -19,8 +19,6 @@ namespace TheShitMod.Cards
         protected override CardInfo.Rarity GetRarity() { return CardInfo.Rarity.Common; }
         protected override GameObject GetCardArt() { return null; }
 
-        private IsFallingOverComponent? m_component;
-
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
             UnityEngine.Debug.Log($"[{TheShitMod.ModInitials}][Card] {GetTitle()} has been setup.");
@@ -32,14 +30,14 @@ namespace TheShitMod.Cards
             UnityEngine.Debug.Log($"[{TheShitMod.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
 
             // check DealDamagePatch
-            m_component = player.gameObject.AddComponent<IsFallingOverComponent>();
+            player.gameObject.AddComponent<IsFallingOverComponent>();
         }
 
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
             UnityEngine.Debug.Log($"[{TheShitMod.ModInitials}][Card] {GetTitle()} has been removed from player {player.playerID}.");
 
-            UnityEngine.Object.Destroy(m_component!);
+            UnityEngine.Object.Destroy(player.gameObject.GetComponent<IsFallingOverComponent>()!);
         }
 
         protected override string GetTitle()
@@ -60,7 +58,7 @@ namespace TheShitMod.Cards
                 {
                     positive = true,
                     stat = "Tilt",
-                    amount = "+2 degrees",
+                    amount = "+10 degrees",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 }
             };

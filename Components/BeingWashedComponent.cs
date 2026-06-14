@@ -8,35 +8,27 @@ namespace TheShitMod.Components
 {
     class BeingWashedComponent : MonoBehaviour
     {
-        void Awake()
+        public void Start()
         {
             StartCoroutine(WashingCycle());
         }
 
+        public float m_elapsed = 0f;
+        public float m_duration = 2f;
+
         IEnumerator WashingCycle()
         {
-            if (!base.GetComponent<GeneralInput>().controlledElseWhere)
+            while (m_elapsed < m_duration)
             {
-                Quaternion startRotation = Camera.main.gameObject.transform.rotation;
-                Quaternion endRotation = Quaternion.Euler(new Vector3(0f, 0f, 360f));
+                float dr = 360f / m_duration; // rotation per second
 
-                float elapsed = 0f;
-                float duration = 2f;
+                gameObject.transform.Rotate(0f, 0f, dr * Time.deltaTime);
 
-                while (elapsed < duration)
-                {
-                    float t = elapsed / duration;
-                    Camera.main.gameObject.transform.rotation = Quaternion.Slerp(startRotation, endRotation, t);
-
-                    elapsed += Time.deltaTime;
-                    yield return null;
-                }
-
-                Camera.main.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, 0f));
-                UnityEngine.Object.Destroy(this);
+                m_elapsed += Time.deltaTime;
+                yield return null;
             }
 
-            yield return null;
+            UnityEngine.Object.Destroy(this);
         }
     }
 }

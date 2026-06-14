@@ -18,11 +18,10 @@ namespace TheShitMod.Cards
         protected override CardInfo.Rarity GetRarity() { return CardInfo.Rarity.Common; }
         protected override GameObject GetCardArt() { return null; }
 
-        private IsRandomDamageComponent? m_component;
-
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
             UnityEngine.Debug.Log($"[{TheShitMod.ModInitials}][Card] {GetTitle()} has been setup.");
+            cardInfo.allowMultiple = false;
         }
 
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
@@ -30,14 +29,14 @@ namespace TheShitMod.Cards
             UnityEngine.Debug.Log($"[{TheShitMod.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
 
             // check DealDamagePatch
-            m_component = player.gameObject.AddComponent<IsRandomDamageComponent>();
+            player.gameObject.AddComponent<IsRandomDamageComponent>();
         }
 
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
             UnityEngine.Debug.Log($"[{TheShitMod.ModInitials}][Card] {GetTitle()} has been removed from player {player.playerID}.");
 
-            UnityEngine.Object.Destroy(m_component!);
+            UnityEngine.Object.Destroy(player.gameObject.GetComponent<IsRandomDamageComponent>()!);
         }
 
         protected override string GetTitle()
@@ -47,7 +46,7 @@ namespace TheShitMod.Cards
 
         protected override string GetDescription()
         {
-            return "yeah this stacks btw";
+            return "yeah this applies per-round btw";
         }
 
         protected override CardInfoStat[] GetStats()

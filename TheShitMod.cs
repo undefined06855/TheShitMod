@@ -12,6 +12,7 @@ namespace TheShitMod
     [BepInDependency("com.willis.rounds.unbound", BepInDependency.DependencyFlags.HardDependency)]
     [BepInDependency("pykess.rounds.plugins.moddingutils", BepInDependency.DependencyFlags.HardDependency)]
     [BepInDependency("pykess.rounds.plugins.cardchoicespawnuniquecardpatch", BepInDependency.DependencyFlags.HardDependency)]
+    [BepInDependency("root.rarity.lib", BepInDependency.DependencyFlags.HardDependency)]
 
     [BepInPlugin(ModId, ModName, Version)]
     [BepInProcess("Rounds.exe")]
@@ -42,6 +43,8 @@ namespace TheShitMod
             CustomCard.BuildCard<Damager>();
             CustomCard.BuildCard<ThisIsOneBigMagazine>();
             CustomCard.BuildCard<WashingMachineLicense>();
+            CustomCard.BuildCard<GrowthRay>();
+            CustomCard.BuildCard<ShrinkRay>();
         }
     }
 }

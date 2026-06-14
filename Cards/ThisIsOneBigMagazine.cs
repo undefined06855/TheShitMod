@@ -14,17 +14,17 @@ namespace TheShitMod.Cards
     {
         protected override CardThemeColor.CardThemeColorType GetTheme() { return CardThemeColor.CardThemeColorType.DefensiveBlue; }
         public override string GetModName() { return TheShitMod.ModInitials; }
-        protected override CardInfo.Rarity GetRarity() { return CardInfo.Rarity.Common; }
+        protected override CardInfo.Rarity GetRarity() { return CardInfo.Rarity.Rare; }
         protected override GameObject GetCardArt() { return null; }
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
         {
             UnityEngine.Debug.Log($"[{TheShitMod.ModInitials}][Card] {GetTitle()} has been setup.");
 
-            gun.ammo = 20;
+            gun.ammo = 35;
             gun.reloadTimeAdd = 20f;
-            gun.attackSpeedMultiplier = 0.1f;
-            gun.percentageDamage = 0.2f;
+            gun.attackSpeedMultiplier = 0.01f;
+            gun.bulletDamageMultiplier = 0.8f;
         }
 
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
@@ -55,14 +55,14 @@ namespace TheShitMod.Cards
                 {
                     positive = true,
                     stat = "Ammo",
-                    amount = "+20",
+                    amount = "+50",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()
                 {
                     positive = true,
                     stat = "Attack Speed",
-                    amount = "x0.1",
+                    amount = "x0.01",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
                 new CardInfoStat()
@@ -76,7 +76,7 @@ namespace TheShitMod.Cards
                 {
                     positive = false,
                     stat = "Damage",
-                    amount = "x0.2",
+                    amount = "x0.8",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 },
             };
