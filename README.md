@@ -15,5 +15,7 @@ work for you.
 - SPEAK TO THE HAND (Rare): Multiplies health by 0.0000000001x but gives you 0.01x block cooldown. I heard you liked blocking!
 - Swap Hands (Common): Swaps your position with the person you shoot (like Uno, that card that nobody follows?)
 - The 1% (Common): Adds 1% to every stat, positive or negative. Uh, doesn't really do much.
+- The 10% (Rare): Adds 10% to every stat, positive or negative. Does a bit.
+- The 100% (Legendary): Adds 100% to every stat, positive or negative. Does quite a lot, actually.
 - This Is One Big Magazine (Rare): Gives you 35 ammo, but makes your reload time 20 seconds. Hope you can use those 35 bullets well!
 - Washing Machine License (Rare): Puts whoever you shoot into a washing machine and spins them around. Sog

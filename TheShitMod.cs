@@ -35,6 +35,8 @@ namespace TheShitMod
             instance = this;
             CustomCard.BuildCard<SpeakToTheHand>();
             CustomCard.BuildCard<TheOnePercent>();
+            CustomCard.BuildCard<TheTenPercent>();
+            CustomCard.BuildCard<TheOneHundredPercent>();
             CustomCard.BuildCard<Green>();
             CustomCard.BuildCard<FuckImFallingOver>();
             CustomCard.BuildCard<SwapHands>();
