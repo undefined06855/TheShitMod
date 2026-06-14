@@ -8,7 +8,6 @@ using CardChoiceSpawnUniqueCardPatch.CustomCategories;
 
 namespace TheShitMod
 {
-    // These are the mods required for our mod to work
     [BepInDependency("com.willis.rounds.unbound", BepInDependency.DependencyFlags.HardDependency)]
     [BepInDependency("pykess.rounds.plugins.moddingutils", BepInDependency.DependencyFlags.HardDependency)]
     [BepInDependency("pykess.rounds.plugins.cardchoicespawnuniquecardpatch", BepInDependency.DependencyFlags.HardDependency)]
@@ -27,7 +26,6 @@ namespace TheShitMod
 
         void Awake()
         {
-            // Use this to call any harmony patch files your mod may have
             var harmony = new Harmony(ModId);
             harmony.PatchAll();
         }

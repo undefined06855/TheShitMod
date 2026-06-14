@@ -13,8 +13,6 @@ namespace TheShitMod.Patches
     {
         static void Postfix(MapManager __instance, ref int mapID)
         {
-            UnityEngine.Debug.Log("CallInNewMap called");
-
             // fuck im falling over
             Camera.main.gameObject.transform.rotation = Quaternion.Euler(Vector3.zero);
 

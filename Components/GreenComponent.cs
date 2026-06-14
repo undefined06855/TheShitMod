@@ -6,6 +6,8 @@ using UnityEngine;
 
 namespace TheShitMod.Components
 {
+    // so theoretically this should make the player green right
+    // in reality this makes the player's limbs invisible ?? so that's a feature now i guess
     class GreenComponent : ReversibleColorEffect
     {
         new public void Start()

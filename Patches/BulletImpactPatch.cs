@@ -34,12 +34,10 @@ namespace TheShitMod.Patches
             
             if (__instance.ownPlayer.gameObject.GetComponent<HasShrinkRayComponent>() != null)
             {
-                UnityEngine.Debug.Log("shrink");
                 scaleChange /= 2f;
             }
             else if (__instance.ownPlayer.gameObject.GetComponent<HasGrowthRayComponent>() != null)
             {
-                UnityEngine.Debug.Log("grow");
                 scaleChange *= 2f;
             }
 

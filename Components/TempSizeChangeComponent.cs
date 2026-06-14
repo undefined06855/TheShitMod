@@ -10,7 +10,6 @@ namespace TheShitMod.Components
     {
         public void Start()
         {
-            UnityEngine.Debug.Log("begin scale change");
             UnityEngine.Debug.Log(m_scaleChange);
             StartCoroutine(Shit());
         }
