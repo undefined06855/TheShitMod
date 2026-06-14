@@ -15,7 +15,7 @@ namespace TheShitMod.Cards
     {
         protected override CardThemeColor.CardThemeColorType GetTheme() { return CardThemeColor.CardThemeColorType.TechWhite; }
         public override string GetModName() { return TheShitMod.ModInitials; }
-        protected override CardInfo.Rarity GetRarity() { return CardInfo.Rarity.Rare; }
+        protected override CardInfo.Rarity GetRarity() { return CardInfo.Rarity.Common; }
         protected override GameObject GetCardArt() { return null; }
 
         private IsSwappingHandsComponent? m_component;

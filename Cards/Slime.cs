@@ -14,7 +14,7 @@ namespace TheShitMod.Cards
     {
         protected override CardThemeColor.CardThemeColorType GetTheme() { return CardThemeColor.CardThemeColorType.PoisonGreen; }
         public override string GetModName() { return TheShitMod.ModInitials; }
-        protected override CardInfo.Rarity GetRarity() { return CardInfo.Rarity.Uncommon; }
+        protected override CardInfo.Rarity GetRarity() { return CardInfo.Rarity.Common; }
         protected override GameObject GetCardArt() { return null; }
 
         public override void SetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)

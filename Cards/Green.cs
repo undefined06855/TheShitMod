@@ -16,7 +16,7 @@ namespace TheShitMod.Cards
     {
         protected override CardThemeColor.CardThemeColorType GetTheme() { return CardThemeColor.CardThemeColorType.PoisonGreen; }
         public override string GetModName() { return TheShitMod.ModInitials; }
-        protected override CardInfo.Rarity GetRarity() { return CardInfo.Rarity.Rare; }
+        protected override CardInfo.Rarity GetRarity() { return CardInfo.Rarity.Common; }
         protected override GameObject GetCardArt() { return null; }
 
         private ReversibleColorEffect? m_colorEffect;
@@ -35,10 +35,11 @@ namespace TheShitMod.Cards
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
             UnityEngine.Debug.Log($"[{TheShitMod.ModInitials}][Card] {GetTitle()} has been added to player {player.playerID}.");
-            if (player.GetComponent<GeneralInput>().controlledElseWhere) return;
 
             m_colorEffect = player.gameObject.AddComponent<ReversibleColorEffect>();
             m_colorEffect.SetColor(new Color(0f, 1f, 0f));
+
+            if (player.GetComponent<GeneralInput>().controlledElseWhere) return;
 
             m_postProcessingObj = new GameObject { layer = 8 }; // 8: Default Post (from discord)
 
@@ -50,7 +51,7 @@ namespace TheShitMod.Cards
             var profile = ScriptableObject.CreateInstance<PostProcessProfile>();
 
             var grading = profile.AddSettings<ColorGrading>();
-            grading.colorFilter.Override(new Color(0f, 1f, 0f));
+            grading.colorFilter.Override(new Color(0.6f, 1f, 0.6f));
             grading.enabled.Override(true);
 
             effect.profile = profile;
